@@ -43,36 +43,54 @@ CREATE TABLE titles(
 SELECT empl.emp_no, empl.last_name, empl.first_name, empl.sex, sal.salary
 from employees as empl
 inner join salary as sal
-ON empl.emp_no=sal.emp_no
+ON empl.emp_no=sal.emp_no;
 
 select first_name, last_name, hire_date
 from employees
 where hire_date >= '1986-01-01' 
-and hire_date < '1987-01-01'
+and hire_date < '1987-01-01';
 
 select empl.emp_no, empl.last_name, empl.first_name, dept.dept_name, deptman.dept_no, deptman.emp_no
 from employees as empl
 inner join dept_manager as deptman
 ON empl.emp_no= deptman.emp_no 
 inner join departments as dept
-ON deptman.dept_no = dept.dept_no
+ON deptman.dept_no = dept.dept_no;
 
 select empl.emp_no, empl.last_name, empl.first_name, dept.dept_name
 from employees as empl
 inner join dept_emp as demp
 ON empl.emp_no = demp.emp_no
 inner join departments as dept
-ON demp.dept_no = dept.dept_no
+ON demp.dept_no = dept.dept_no;
 
 select first_name, last_name, sex
 from employees
 where first_name='Hercules'
-and last_name like 'B%'
+and last_name like 'B%';
 
-select emp_no, last_name, first_name, dept_name
-from employees as empl, dept_emp as dempt, departments as dept
+select empl.emp_no, empl.last_name, empl.first_name, dept.dept_name
+from employees as empl
+inner join dept_emp as dempt
+ON empl.emp_no= dempt.emp_no
+inner join departments as dept 
+ON dempt.dept_no = dept.dept_no
+where dept_name= 'Sales';
+
+select empl.emp_no, empl.last_name, empl.first_name, dept.dept_name
+from employees as empl
+inner join dept_emp as dempt
+ON empl.emp_no = dempt.emp_no
+inner join departments as dept
+ON dempt.dept_no = dept.dept_no
 where dept_name= 'Sales'
+OR dept_name= 'Development';
 
-same but sales and development
+select last_name, count(last_name) AS 'Count Last Name'
+from employees
+group by last_name
+Order By 'Count Last Name' DESC;
+
+
 
 
